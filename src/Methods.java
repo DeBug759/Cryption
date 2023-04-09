@@ -1,27 +1,37 @@
+import javax.swing.*;
+
 public class Methods {
-    public void decript(String word, int key) {
-        char[] arr = word.toCharArray();
-        char[] arr1 = new char[arr.length];
 
-        for(int i = 0; i < arr.length; i++) {
-            arr1[i] = (char) (arr[i] - key);
-        }
+    public enum State{
 
-        for(int i = 0; i < arr1.length; i++) {
-            System.out.print(arr1[i]);
-        }
+        WELCOME,
+        IDLE,
+        HOME_OPTIONS,
+        ENCRYPT,
+        DECRYPT,
+        GETTING_INPUT;
+
     }
 
-    public void encript(String word, int key) {
-        char[] arr = word.toCharArray();
-        char[] arr1 = new char[arr.length];
+    State state;
 
-        for(int i = 0; i < arr.length; i++) {
-            arr1[i] = (char) (arr[i] + key);
-        }
+    String[] encrypDecryp = {"Encrypt Message", "Decrypt Message"};
+    String[] encryptOptions = {"Caesar Cipher", "AtBash Cipher", "Brute Force"};
+    public void welcome(){
+        JOptionPane.showMessageDialog(null, "*************** CRYPTION.exe ***************");
+        JOptionPane.showMessageDialog(null, "Welcome to CRYPTION.exe. Encrypt and decrypt messages.");
+        int encDec = JOptionPane.showOptionDialog(null, "What would you like to do today?", "Encrypt or Decrypt", 0, 2, null, encrypDecryp, encrypDecryp[0]);
 
-        for(int i = 0; i < arr1.length; i++) {
-            System.out.print(arr1[i]);
-        }
+        /*if(encDec == 0){
+             state = Methods.State.ENCRYPT;
+        }*/
+        state = Methods.State.ENCRYPT;
     }
+
+    public void encrypt(){
+        String encryptMessage = JOptionPane.showInputDialog(null, "What would you like to encrypt today?");
+        String shiftKey = JOptionPane.showInputDialog(null, "What would you like your shift key to be?");
+        state = State.ENCRYPT;
+    }
+
 }
